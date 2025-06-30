@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trolli - Nike Shoes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    nav {
+      background-color: #111;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff9900;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin: 2rem 0 1rem;
+      font-weight: 700;
+    }
+
+    .product-list, .cart, .checkout-form {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 1rem auto;
+      max-width: 1000px;
+      padding: 0 1rem;
+    }
+
+    .product, .cart-item {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      width: 220px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 8px 15px;
+      border: none;
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    select, input[type='number'], input[type='text'], input[type='email'] {
+      margin-top: 5px;
+      padding: 8px;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    .cart {
+      flex-direction: column;
+      max-width: 600px;
+      background-color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    ul#cart-items {
+      list-style: none;
+      padding: 0;
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fafafa;
+      margin-top: 10px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 5px 10px;
+      padding: 10px;
+      font-size: 0.95em;
+    }
+
+    .cart-item button.remove-btn {
+      background-color: #dc3545;
+      padding: 5px 8px;
+      border-radius: 5px;
+      font-size: 0.9em;
+    }
+
+    .cart-item button.remove-btn:hover {
+      background-color: #b02a37;
+    }
+
+    .cart-total {
+      margin-top: 15px;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .checkout-form {
+      flex-direction: column;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      background-color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkout-form input, .checkout-form select {
+      margin: 8px 0;
+    }
+
+    .checkout-form button {
+      background-color: #007bff;
+    }
+
+    .checkout-form button:hover {
+      background-color: #0056b3;
+    }
+
+    .checkout-message {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 5px;
+      padding: 20px;
+      font-size: 1.1em;
+      text-align: center;
+      margin: 20px auto;
+      max-width: 600px;
+      display: none;
+    }
+
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="0000.html"><i class="fas fa-home"></i> Home</a>
+    <a href="FLYER SEPATU NIKE.png"><i class="fas fa-download"></i> FLYER</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="about.html"><i class="fas fa-user"></i> About Me</a>
+    <a href="Trolli.html"><i class="fas fa-shopping-cart"></i> Trolli</a>
+    <a href="Checkout.html"><i class="fas fa-credit-card"></i> Checkout</a>
+  </nav>
+
+  <h1>TROLLI MENU</h1>
+
+  <div class="product-list" id="product-list"></div>
+
+  <div class="cart">
+    <h2>Keranjang Belanja Anda</h2>
+    <ul id="cart-items"></ul>
+    <div class="cart-total">
+      Total Harga: <span id="total-price">Rp 0</span>
+    </div>
+  </div>
+
+  <div class="checkout-form">
+    <h2>Formulir Pembelian</h2>
+    <form id="checkout-form" onsubmit="submitCheckout(event)">
+      <input type="text" id="name" placeholder="Nama Lengkap" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="text" id="phone" placeholder="No Telepon" required />
+      <input type="text" id="address" placeholder="Alamat Pengiriman" required />
+      <select id="payment-method" required>
+        <option value="">Pilih Metode Pembayaran</option>
+        <option value="transfer">Transfer Bank</option>
+        <option value="cod">Bayar di Tempat (COD)</option>
+      </select>
+      <button type="submit">Selesaikan Pembelian</button>
+    </form>
+  </div>
+
+  <div class="checkout-message" id="checkout-message"></div>
+
+  <footer>
+    <p>&copy; 2025 NIKE SHOES - Tiya Noviyanti. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const products = [
+      { id: 'CASUAL NIKE P - 600', name: 'CASUAL NIKE P - 600', price: 1700000, image: 'CASUAL NIKE P - 600.jpeg' },
+      { id: 'NIKE DUNK LOW', name: "NIKE DUNK LOW", price: 1400000, image: "NIKE DUNK LOW.jpeg" },
+      { id: 'NIKE COURT VISION LOW', name: 'NIKE COURT VISION LOW', price: 1200000, image: 'NIKE COURT VISION LOW.jpeg' },
+      { id: 'NIKE AIR FORCE 1 \'07', name: "NIKE AIR FORCE 1 '07", price: 1549000, image: "Nike Air Force 1 '07 SE.jpeg" },
+      { id: 'NIKE AIRMAX 1 SP', name: 'NIKE AIRMAX 1 SP', price: 1924000, image: 'NIKE AIRMAX 1 SP.jpeg' },
+      { id: 'GIANNIS IMORTALITY 4', name: 'GIANNIS IMORTALITY 4', price: 1299000, image: 'GIANNIS IMORTALITY 4.jpeg' },
+    ];
+
+    const productList = document.getElementById('product-list');
+    let cart = [];
+    let total = 0;
+
+    products.forEach(product => {
+      const div = document.createElement('div');
+      div.classList.add('product');
+      const sizes = [38, 39, 40, 41, 42, 43, 44]
+        .map(s => `<option value="${s}">${s}</option>`)
+        .join('');
+      div.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <p>${product.name} - Rp${product.price.toLocaleString()}</p>
+        <select id="size-${product.id}">
+          <option value="">Pilih Ukuran</option>
+          ${sizes}
+        </select>
+        <input type="number" id="qty-${product.id}" min="1" value="1" />
+        <button onclick="addToCart('${product.id}')">Tambah ke Keranjang</button>
+      `;
+      productList.appendChild(div);
+    });
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      const sizeSelect = document.getElementById(`size-${productId}`);
+      const qtyInput = document.getElementById(`qty-${productId}`);
+      const size = sizeSelect.value;
+      const qty = parseInt(qtyInput.value) || 1;
+
+      if (!size) {
+        alert('Pilih ukuran terlebih dahulu!');
+        return;
+      }
+
+      const existingIndex = cart.findIndex(item => item.name === product.name && item.size === size);
+      if (existingIndex !== -1) {
+        cart[existingIndex].qty += qty;
+      } else {
+        cart.push({ name: product.name, price: product.price, size, qty });
+      }
+
+      recalcTotal();
+      updateCart();
+
+      // Reset input fields
+      sizeSelect.value = '';
+      qtyInput.value = 1;
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      cartItems.innerHTML = '';
+      cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.classList.add('cart-item');
+        li.innerHTML = `
+          ${item.name} (Ukuran ${item.size}) x${item.qty} - Rp ${(item.price * item.qty).toLocaleString()}
+          <button class="remove-btn" onclick="removeFromCart(${index})">Hapus</button>
+        `;
+        cartItems.appendChild(li);
+      });
+    }
+
+    function recalcTotal() {
+      total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      document.getElementById('total-price').textContent = 'Rp ' + total.toLocaleString();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      recalcTotal();
+      updateCart();
+    }
+
+    function submitCheckout(event) {
+      event.preventDefault();
+
+      if (cart.length === 0) {
+        alert('Keranjang kosong!');
+        return;
+      }
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+      const paymentMethod = document.getElementById('payment-method').value;
+
+      const orderDetails = cart.map(item =>
+        `${item.name} (Ukuran ${item.size}) x${item.qty} - Rp ${(item.price * item.qty).toLocaleString()}`
+      ).join('\n');
+
+      const message = `
+Terima kasih, ${name}!
+
+Pembelian Anda berhasil.
+
+Detail Pesanan:
+${orderDetails}
+
+Total: Rp ${total.toLocaleString()}
+
+Data Pengiriman:
+Nama: ${name}
+Email: ${email}
+No Telp: ${phone}
+Alamat: ${address}
+Metode Pembayaran: ${paymentMethod}
+      `;
+
+      const checkoutMsg = document.getElementById('checkout-message');
+      checkoutMsg.style.display = 'block';
+      checkoutMsg.textContent = message;
+
+      cart = [];
+      total = 0;
+      updateCart();
+      document.getElementById('total-price').textContent = 'Rp 0';
+      document.getElementById('checkout-form').reset();
+    }
+  </script>
+</body>
+</html>

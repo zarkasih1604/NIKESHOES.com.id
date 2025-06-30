@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trolli - NIKE SHOES</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    nav {
+      background-color: #111;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff9900;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(to right, #000, #333);
+      color: white;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-list,
+    .cart {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .product,
+    .cart-item {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 10px;
+      width: 250px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .product select,
+    .product input[type="number"] {
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .product button {
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .product button:hover {
+      background-color: #218838;
+    }
+
+    .cart h2 {
+      width: 100%;
+      text-align: center;
+      margin: 2rem 0 1rem;
+    }
+
+    .cart-total {
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="0000.html"><i class="fas fa-home"></i> Home</a>
+    <a href="FLYER SEPATU NIKE.png"><i class="fas fa-download"></i> FLYER</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="about.html"><i class="fas fa-user"></i> About Me</a>
+    <a href="Trolli.html"><i class="fas fa-shopping-cart"></i> Trolli</a>
+    <a href="Checkout.html"><i class="fas fa-credit-card"></i> Checkout</a>
+  </nav>
+
+  <header>
+    <h1>TROLLI MENU</h1>
+  </header>
+
+  <div class="container">
+    <div class="product-list" id="product-list"></div>
+    <div class="cart">
+      <h2>Keranjang Belanja Anda</h2>
+      <ul id="cart-items"></ul>
+      <div class="cart-total">
+        Total Harga: <span id="total-price">Rp 0</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 NIKE SHOES - Tiya Noviyanti. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const products = [
+      { name: "CASUAL NIKE P - 600", price: 1700000, image: "CASUAL NIKE P - 600.jpeg" },
+      { name: "NIKE DUNK LOW", price: 1400000, image: "NIKE DUNK LOW.jpeg" },
+      { name: "NIKE COURT VISION LOW", price: 1200000, image: "NIKE COURT VISION LOW.jpeg" },
+      { name: "NIKE AIR FORCE 1 '07", price: 1549000, image: "Nike Air Force 1 '07 SE.jpeg" },
+      { name: "NIKE AIRMAX 1 SP", price: 1924000, image: "NIKE AIRMAX 1 SP.jpeg" },
+      { name: "GIANNIS IMORTALITY 4", price: 1299000, image: "GIANNIS IMORTALITY 4.jpeg" },
+    ];
+
+    let cart = [];
+    let total = 0;
+
+    function renderProducts() {
+      const list = document.getElementById('product-list');
+      list.innerHTML = '';
+
+      products.forEach((product, index) => {
+        const item = document.createElement('div');
+        item.classList.add('product');
+        item.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <p><strong>${product.name}</strong><br>Rp ${product.price.toLocaleString()}</p>
+          <select id="size-${index}">
+            <option value="">Pilih Ukuran</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
+          </select>
+          <input type="number" id="quantity-${index}" min="1" value="1">
+          <button onclick="addToCart(${index})">Tambah ke Keranjang</button>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function addToCart(index) {
+      const size = document.getElementById(`size-${index}`).value;
+      const quantity = parseInt(document.getElementById(`quantity-${index}`).value);
+      const product = products[index];
+
+      if (!size) {
+        alert("Pilih ukuran terlebih dahulu!");
+        return;
+      }
+
+      cart.push({ name: `${product.name} (Ukuran ${size})`, price: product.price, quantity: quantity });
+      updateCart();
+      total += product.price * quantity;
+      document.getElementById('total-price').textContent = 'Rp ' + total.toLocaleString();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      cartItems.innerHTML = '';
+
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.classList.add('cart-item');
+        li.textContent = `${item.quantity} x ${item.name} - Rp ${item.price.toLocaleString()}`;
+        cartItems.appendChild(li);
+      });
+    }
+
+    renderProducts();
+  </script>
+</body>
+
+</html>
